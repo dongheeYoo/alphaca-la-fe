@@ -1,23 +1,26 @@
 import { Route, Routes } from 'react-router-dom';
 import styled from 'styled-components';
-import { MainPage } from './MainPage';
+import { MainPage } from '../MainPage';
+import { Navbar } from '../Navbar';
 
 const Container = styled.div({
-  display: 'flex',
   width: '100%',
   height: '100%',
 });
 const BodySection = styled.div({
-  display: 'flex`',
+  display: 'flex',
   position: 'relative',
+  top: '50px',
   width: '100%',
+  overflow: 'hidden',
+  justifyContent: 'center',
 });
 
 function App() {
   return (
     <Container>
       {/* TODO: Navbar */}
-      aaaa
+      <Navbar />
       <BodySection>
         <Routes>
           <Route path="/" element={<MainPage />} />
