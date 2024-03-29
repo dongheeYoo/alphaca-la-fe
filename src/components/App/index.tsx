@@ -2,6 +2,7 @@ import { Route, Routes } from 'react-router-dom';
 import styled from 'styled-components';
 import { MainPage } from '../MainPage';
 import { Navbar } from '../Navbar';
+import { CharacterListView } from '../CharacterListView';
 
 const Container = styled.div({
   width: '100%',
@@ -24,6 +25,7 @@ function App() {
       <BodySection>
         <Routes>
           <Route path="/" element={<MainPage />} />
+          <Route path="/characters" element={<CharacterListView />} />
         </Routes>
       </BodySection>
     </Container>

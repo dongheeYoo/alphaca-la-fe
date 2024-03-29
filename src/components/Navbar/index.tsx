@@ -5,7 +5,7 @@ import styled from 'styled-components';
 const tabs = [
   {
     key: 'characters',
-    value: '',
+    value: 'characters',
     name: '원정대 캐릭',
   },
   {
