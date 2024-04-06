@@ -6,3 +6,13 @@ export type Character = {
   ItemAvgLevel: string;
   ItemMaxLevel: string;
 };
+
+export type Raid = {
+  name: string;
+  difficulties: RaidDifficulties[];
+};
+
+export type RaidDifficulties = {
+  lvLimits: number;
+  difficulty: string;
+};
