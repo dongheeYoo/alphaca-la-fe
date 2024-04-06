@@ -10,7 +10,7 @@ const tabs = [
   },
   {
     key: 'groups',
-    value: '',
+    value: 'groups',
     name: '공격대 관리',
   },
   {
