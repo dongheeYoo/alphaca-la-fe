@@ -38,14 +38,14 @@ export const CharacterTable = ({ characterName }: { characterName: string }) => 
           return raid.difficulties.some(
             difficulty => difficulty.lvLimits < parseInt(d.ItemMaxLevel.replace(/,/g, ''))
           );
-        }),
-        // .sort((a, b) => {
-        //   return b.difficulties[0].lvLimits - a.difficulties[0].lvLimits;
-        // })
-        // .slice(0, 3)
-        // .map(d => {
-        //   return d.name + d.difficulties[0].difficulty;
-        // }),
+        })
+          .sort((a, b) => {
+            return b.difficulties[0].lvLimits - a.difficulties[0].lvLimits;
+          })
+          .slice(0, 3)
+          .map(d => {
+            return d.name + d.difficulties[0].difficulty;
+          }),
       }))}
       pagination={{
         pageSize: 7,
