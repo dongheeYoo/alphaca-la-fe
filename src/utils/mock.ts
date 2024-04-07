@@ -1,0 +1,140 @@
+export const groupsMockData = [
+  {
+    key: 0,
+    raid: '일리아칸',
+    difficulty: '노말',
+    name: '일리아칸 1번',
+    done: '완료',
+    member: [
+      {
+        name: '히도뉴',
+        CharacterName: '고달픈사멸의삶',
+        CharacterClassName: '워로드',
+        ItemMaxLevel: 1627,
+      },
+      {
+        name: 'RAFF',
+        CharacterName: '아가이깡',
+        CharacterClassName: '도화가',
+        ItemMaxLevel: 1635,
+      },
+      {
+        name: '태희',
+        CharacterName: '알망고얌',
+        CharacterClassName: '건슬링어',
+        ItemMaxLevel: 1625,
+      },
+      {
+        name: '토모',
+        CharacterName: '아키나츠리',
+        CharacterClassName: '창술사',
+        ItemMaxLevel: 1633,
+      },
+    ],
+  },
+  {
+    key: 1,
+    raid: '카멘',
+    difficulty: '노말',
+    name: '카멘 반숙',
+    done: '미완료',
+    member: [
+      {
+        name: '히도뉴',
+        CharacterName: '고달픈사멸의삶2',
+        CharacterClassName: '워로드',
+        ItemMaxLevel: 1627,
+      },
+      {
+        name: 'RAFF',
+        CharacterName: '아가이깡2',
+        CharacterClassName: '도화가',
+        ItemMaxLevel: 1635,
+      },
+      {
+        name: '태희',
+        CharacterName: '알망고얌2',
+        CharacterClassName: '건슬링어',
+        ItemMaxLevel: 1625,
+      },
+      {
+        name: '토모',
+        CharacterName: '아키나츠리2',
+        CharacterClassName: '창술사',
+        ItemMaxLevel: 1633,
+      },
+      {
+        name: '동재',
+        CharacterName: '수라로로',
+        CharacterClassName: '브레이커',
+        ItemMaxLevel: 1623,
+      },
+    ],
+  },
+  {
+    key: 2,
+    raid: '카양겔',
+    difficulty: '하드',
+    name: '벌금파티',
+    done: '완료',
+    member: [
+      {
+        name: '히도뉴',
+        CharacterName: '홀리도뉴',
+        CharacterClassName: '홀리나이트',
+        ItemMaxLevel: 1600,
+      },
+      {
+        name: 'RAFF',
+        CharacterName: '소울이깡',
+        CharacterClassName: '소울이터',
+        ItemMaxLevel: 1600,
+      },
+      {
+        name: '태희',
+        CharacterName: '알파카망고ll',
+        CharacterClassName: '워로드',
+        ItemMaxLevel: 1611,
+      },
+      {
+        name: '토모',
+        CharacterName: '후유나츠리',
+        CharacterClassName: '블레이드',
+        ItemMaxLevel: 1611,
+      },
+    ],
+  },
+  {
+    key: 3,
+    raid: '상아탑',
+    difficulty: '노말',
+    name: '상노 1번파티',
+    done: '미완료',
+    member: [
+      {
+        name: '히도뉴',
+        CharacterName: '히도유',
+        CharacterClassName: '바드',
+        ItemMaxLevel: 1600,
+      },
+      {
+        name: 'RAFF',
+        CharacterName: '소울이깡',
+        CharacterClassName: '소울이터',
+        ItemMaxLevel: 1600,
+      },
+      {
+        name: '태희',
+        CharacterName: '알파카망고ll',
+        CharacterClassName: '워로드',
+        ItemMaxLevel: 1611,
+      },
+      {
+        name: '동재',
+        CharacterName: '만월로로',
+        CharacterClassName: '소울이터',
+        ItemMaxLevel: 1600,
+      },
+    ],
+  },
+];
