@@ -36,7 +36,7 @@ const columns: TableColumnsType<TableDataType> = [
 export const GroupMemberTable = ({ member }: { member: TableDataType[] }) => {
   return (
     <Container>
-      <Table key={'name'} columns={columns} dataSource={member} pagination={false} />
+      <Table rowKey={'name'} columns={columns} dataSource={member} pagination={false} />
     </Container>
   );
 };

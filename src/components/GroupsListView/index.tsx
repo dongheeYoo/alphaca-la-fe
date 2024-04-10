@@ -1,38 +1,56 @@
-import { Button, Modal, Space, Table, TableColumnsType, Tag } from 'antd';
+import { Button, Modal, Popconfirm, Space, Table, TableColumnsType, Tag } from 'antd';
 import styled from 'styled-components';
 import { groupsMockData } from '../../utils/mock';
 import { GroupMemberTable } from './GroupMemberTable';
 import { useDialog } from '../../hooks/useDialog';
 import { useForm } from 'antd/es/form/Form';
 import { GroupItemRegisterForm } from './GroupItemRegisterForm';
+import { useState } from 'react';
 
 interface TableDataType {
   name: string;
   raid: string;
   difficulty: string;
   done: string;
+  member: MemberTableDataType[];
+}
+
+interface MemberTableDataType {
   member: {
     name: string;
     CharacterName: string;
     CharacterClassName: string;
     ItemMaxLevel: number;
-  }[];
+  };
 }
 
 const Container = styled.div({});
 
 export const GroupsListView = () => {
+  const [member, setMember] = useState<MemberTableDataType[]>([
+    {
+      member: {
+        name: '',
+        CharacterName: '',
+        CharacterClassName: '',
+        ItemMaxLevel: 0,
+      },
+    },
+  ]);
   const { open: openEditDialog, isOpen: isEditOpen, close: closeEditDialog } = useDialog();
   const { open: openAddDialog, isOpen: isAddOpen, close: closeAddDialog } = useDialog();
   const [addForm] = useForm();
   const [editForm] = useForm();
 
   const handleActionClick = (data: TableDataType, callback: any) => {
-    // TODO: use jobDetail data instead of not directly use query data
-    // const jobItem: any = queryClient.getQueryData(['jobDetail', data.id]);
-    // setTargetJob(data);
     editForm.setFieldsValue(data);
+    setMember(data.member);
     callback?.();
+  };
+
+  const handleAddGroupAction = () => {
+    setMember([]);
+    openAddDialog();
   };
 
   const onEditGroup = () => {
@@ -68,7 +86,6 @@ export const GroupsListView = () => {
     //   }
     // );
     const data = addForm.getFieldsValue();
-    console.log(data);
   };
   const columns: TableColumnsType<TableDataType> = [
     {
@@ -142,9 +159,17 @@ export const GroupsListView = () => {
             </Button>
             {/* TODO: 완료처리 누르면 Modal 띄우고, 확인 누르면 완료처리. 그리고 완료 철회 버튼도 만들어야될듯..? 잘못
                 누를수있으니까 */}
-            <Button size="small" onClick={() => console.log('완료처리', data)}>
-              완료처리
-            </Button>
+            <Popconfirm
+              title="완료처리"
+              description="완료처리 하시겠습니까?"
+              onConfirm={() => console.log('confirm')}
+              onCancel={() => console.log('cancel')}
+              okText="완료"
+              cancelText="취소">
+              <Button size="small" onClick={() => console.log('완료처리', data)}>
+                완료처리
+              </Button>
+            </Popconfirm>
           </Space>
         );
       },
@@ -156,7 +181,7 @@ export const GroupsListView = () => {
       {/* TODO: reset 버튼 만들기 - 수요일에만 활성화..? */}
       <Button onClick={() => console.log('리셋!')}>수요일이다</Button>
       {/* 공격대 생성 버튼 */}
-      <Button onClick={openAddDialog}>공격대 생성</Button>
+      <Button onClick={() => handleAddGroupAction()}>공격대 생성</Button>
       <Table
         rowKey={'key'}
         columns={columns}
@@ -186,7 +211,7 @@ export const GroupsListView = () => {
               수정
             </Button>,
           ]}>
-          <GroupItemRegisterForm form={editForm} onSubmit={onEditGroup} />
+          <GroupItemRegisterForm form={editForm} member={member} onSubmit={onEditGroup} />
         </Modal>
       )}
       {isAddOpen && (
@@ -204,7 +229,7 @@ export const GroupsListView = () => {
               생성
             </Button>,
           ]}>
-          <GroupItemRegisterForm form={addForm} onSubmit={onAddGroup} />
+          <GroupItemRegisterForm form={addForm} member={member} onSubmit={onAddGroup} />
         </Modal>
       )}
     </Container>
