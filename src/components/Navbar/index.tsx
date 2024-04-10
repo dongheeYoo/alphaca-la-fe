@@ -14,8 +14,8 @@ const tabs = [
     name: '공격대 관리',
   },
   {
-    key: 'schedules',
-    value: '',
+    key: 'calender',
+    value: 'calender',
     name: '스케쥴 관리',
   },
 ];
