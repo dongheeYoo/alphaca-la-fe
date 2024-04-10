@@ -6,6 +6,7 @@ import { useDialog } from '../../hooks/useDialog';
 import { useForm } from 'antd/es/form/Form';
 import { GroupItemRegisterForm } from './GroupItemRegisterForm';
 import { useState } from 'react';
+import { Member } from './Member';
 
 interface TableDataType {
   name: string;
@@ -26,6 +27,14 @@ interface MemberTableDataType {
 
 const Container = styled.div({});
 
+const MemberTableSection = styled.div({
+  display: 'flex',
+  flexDirection: 'column',
+  '>Button': {
+    width: '70px',
+  },
+});
+
 export const GroupsListView = () => {
   const [member, setMember] = useState<MemberTableDataType[]>([
     {
@@ -39,6 +48,7 @@ export const GroupsListView = () => {
   ]);
   const { open: openEditDialog, isOpen: isEditOpen, close: closeEditDialog } = useDialog();
   const { open: openAddDialog, isOpen: isAddOpen, close: closeAddDialog } = useDialog();
+  const { open: openMemberDialog, isOpen: isMemberOpen, close: closeMemberDialog } = useDialog();
   const [addForm] = useForm();
   const [editForm] = useForm();
 
@@ -69,6 +79,10 @@ export const GroupsListView = () => {
     //   }
     // );
     alert('수정');
+    const data = editForm.getFieldsValue();
+    console.log('edited data from Form: ', data);
+    console.log('edited Member data: ', member);
+    closeEditDialog();
   };
   const onAddGroup = () => {
     // const data: JobItem = addForm.getFieldsValue();
@@ -85,7 +99,11 @@ export const GroupsListView = () => {
     //     },
     //   }
     // );
+    alert('생성');
     const data = addForm.getFieldsValue();
+    console.log('added data from Form: ', data);
+    console.log('added Member data: ', member);
+    closeAddDialog();
   };
   const columns: TableColumnsType<TableDataType> = [
     {
@@ -211,7 +229,12 @@ export const GroupsListView = () => {
               수정
             </Button>,
           ]}>
-          <GroupItemRegisterForm form={editForm} member={member} onSubmit={onEditGroup} />
+          <GroupItemRegisterForm form={editForm} onSubmit={onEditGroup} />
+          <MemberTableSection>
+            <label>멤버</label>
+            <Button onClick={openMemberDialog}>수정</Button>
+            <GroupMemberTable member={member} />
+          </MemberTableSection>
         </Modal>
       )}
       {isAddOpen && (
@@ -229,7 +252,30 @@ export const GroupsListView = () => {
               생성
             </Button>,
           ]}>
-          <GroupItemRegisterForm form={addForm} member={member} onSubmit={onAddGroup} />
+          <GroupItemRegisterForm form={addForm} onSubmit={onAddGroup} />
+          <MemberTableSection>
+            <label>멤버</label>
+            <Button onClick={openMemberDialog}>추가</Button>
+            <GroupMemberTable member={member} />
+          </MemberTableSection>
+        </Modal>
+      )}
+      {isMemberOpen && (
+        <Modal
+          centered
+          title="멤버 수정하기"
+          open={isMemberOpen}
+          onOk={closeMemberDialog}
+          onCancel={closeMemberDialog}
+          footer={[
+            <Button key="back" onClick={closeMemberDialog}>
+              취소
+            </Button>,
+            <Button htmlType="submit" key="submit" type="primary" onClick={closeMemberDialog}>
+              수정
+            </Button>,
+          ]}>
+          <Member member={member} setMember={setMember} />
         </Modal>
       )}
     </Container>

@@ -28,15 +28,13 @@ const characterNames = ['히도뉴', 'RAFF', '알망고얌', '아키나츠리', 
 
 export const Member = ({ member, setMember }: { member: any; setMember: any }) => {
   const [targetData, setTargetData] = useState<string>('');
-  const [members, setMembers] = useState<MemberDataType[]>(member);
-  console.log(members);
 
   const handleAction = (targetName: string) => {
     setTargetData(targetName);
   };
 
-  const editMemberItems = (d: any) => {
-    setMember((prev: any) => [...prev, d]);
+  const editMemberItems = (d: MemberDataType) => {
+    setMember(member.filter((member: MemberDataType) => member.CharacterName !== d.CharacterName));
   };
 
   return (
@@ -53,11 +51,11 @@ export const Member = ({ member, setMember }: { member: any; setMember: any }) =
             </List.Item>
           )}
         />
-        <MemberDetails characterName={targetData} setMember={setMembers} />
+        <MemberDetails characterName={targetData} setMember={setMember} />
       </ListSection>
       <MemberSection>
-        {members?.map(d => (
-          <Button onClick={d => editMemberItems(d)}>
+        {member?.map((d: any, i: any) => (
+          <Button key={i} onClick={() => editMemberItems(d)}>
             {d.CharacterName}
             <CloseOutlined />
           </Button>
@@ -74,8 +72,10 @@ const MemberDetails = ({ characterName, setMember }: { characterName: string; se
     setMember((prev: any) => [
       ...prev,
       {
-        name: item.name,
+        name: characterName,
         CharacterName: item.CharacterName,
+        CharacterClassName: item.CharacterClassName,
+        ItemMaxLevel: item.ItemMaxLevel,
       },
     ]);
   };
