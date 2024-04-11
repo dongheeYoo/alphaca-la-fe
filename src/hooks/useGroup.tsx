@@ -23,6 +23,20 @@ export const useUpdateGroup = () => {
   });
 };
 
+export const useDeleteGroup = () => {
+  return useMutation({
+    mutationKey: ['deleteGroup'],
+    mutationFn: api.deleteGroup,
+  });
+};
+
+export const useResetDoneGroup = () => {
+  return useMutation({
+    mutationKey: ['resetDoneGroup'],
+    mutationFn: api.resetDoneGroup,
+  });
+};
+
 export const useInvalidateGroups = () => {
   const queryClient = useQueryClient();
   return () =>
