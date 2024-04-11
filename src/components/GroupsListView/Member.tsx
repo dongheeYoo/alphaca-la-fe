@@ -85,7 +85,7 @@ const MemberDetails = ({ characterName, setMember }: { characterName: string; se
       size="small"
       header={<div>캐릭터</div>}
       bordered
-      dataSource={data?.slice(0, 5)}
+      dataSource={data?.slice(0, 6)}
       renderItem={item => (
         <List.Item>
           <Button onClick={() => handleAction(item)}>{item.CharacterName}</Button>
