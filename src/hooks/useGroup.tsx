@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Group } from '../utils/types';
 import api from '../utils/api';
 
@@ -14,4 +14,19 @@ export const useAddGroup = () => {
     mutationKey: ['addGroup'],
     mutationFn: api.postGroup,
   });
+};
+
+export const useUpdateGroup = () => {
+  return useMutation({
+    mutationKey: ['updateGroup'],
+    mutationFn: api.updateGroup,
+  });
+};
+
+export const useInvalidateGroups = () => {
+  const queryClient = useQueryClient();
+  return () =>
+    queryClient.invalidateQueries({
+      queryKey: ['groupInfos'],
+    });
 };
