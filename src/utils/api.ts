@@ -40,12 +40,30 @@ class API {
     return res;
   }
 
-  async updateGroup({ data }: { data: any }) {
+  async updateGroup({ data }: { data: Group }) {
     const url = `${END_POINT}/group/${data._id}`;
     const req = await fetch(url, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ ...data }),
+    });
+    const res = await req.json();
+    return res;
+  }
+
+  async deleteGroup(id: string) {
+    const url = `${END_POINT}/group/${id}`;
+    const req = await fetch(url, {
+      method: 'DELETE',
+    });
+    const res = await req.json();
+    return res;
+  }
+
+  async resetDoneGroup() {
+    const url = `${END_POINT}/group/reset/done`;
+    const req = await fetch(url, {
+      method: 'PUT',
     });
     const res = await req.json();
     return res;

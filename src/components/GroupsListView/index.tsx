@@ -6,7 +6,14 @@ import { useForm } from 'antd/es/form/Form';
 import { GroupItemRegisterForm } from './GroupItemRegisterForm';
 import { useState } from 'react';
 import { Member } from './Member';
-import { useAddGroup, useGroup, useInvalidateGroups, useUpdateGroup } from '../../hooks/useGroup';
+import {
+  useAddGroup,
+  useDeleteGroup,
+  useGroup,
+  useInvalidateGroups,
+  useResetDoneGroup,
+  useUpdateGroup,
+} from '../../hooks/useGroup';
 import { Group, MemberDataType } from '../../utils/types';
 
 const Container = styled.div({});
@@ -37,6 +44,8 @@ export const GroupsListView = () => {
   const { data } = useGroup();
   const { mutate: addGroup } = useAddGroup();
   const { mutate: updateGroup } = useUpdateGroup();
+  const { mutate: deleteGroup } = useDeleteGroup();
+  const { mutate: resetGroup } = useResetDoneGroup();
   const invalidateGroups = useInvalidateGroups();
 
   const handleActionClick = (data: Group, callback: any) => {
@@ -88,13 +97,52 @@ export const GroupsListView = () => {
           alert('공격대 추가에 문제가 발생했습니다.');
           console.log(err);
         },
+        onSettled: () => {
+          addForm.resetFields();
+        },
       }
     );
   };
 
   const onDeleteGroup = () => {
-    console.log('deleted');
-    closeEditDialog();
+    const id = editForm.getFieldValue('_id');
+
+    deleteGroup(id, {
+      onSuccess: () => {
+        invalidateGroups();
+        closeEditDialog();
+      },
+      onError: (err: Error) => {
+        alert('공격대 삭제에 문제가 발생했습니다.');
+        console.log(err);
+      },
+    });
+  };
+
+  const onDoneGroup = (d: Group) => {
+    const data: Group = {
+      ...d,
+      done: true,
+    };
+
+    updateGroup(
+      { data },
+      {
+        onSuccess: () => {
+          invalidateGroups();
+          closeEditDialog();
+        },
+        onError: (err: Error) => {
+          alert('공격대 수정에 문제가 발생했습니다.');
+          console.log(err);
+        },
+      }
+    );
+  };
+
+  const onResetGroup = () => {
+    resetGroup();
+    invalidateGroups();
   };
 
   const columns: TableColumnsType<Group> = [
@@ -168,11 +216,12 @@ export const GroupsListView = () => {
             <Popconfirm
               title="완료처리"
               description="완료처리 하시겠습니까?"
-              onConfirm={() => console.log('confirm')}
-              onCancel={() => console.log('cancel')}
+              disabled={data.done}
+              onConfirm={() => onDoneGroup(data)}
+              //onCancel={() => console.log('cancel')}
               okText="완료"
               cancelText="취소">
-              <Button size="small" onClick={() => console.log('완료처리', data)}>
+              <Button size="small" disabled={data.done}>
                 완료처리
               </Button>
             </Popconfirm>
@@ -185,7 +234,7 @@ export const GroupsListView = () => {
   return (
     <Container>
       {/* TODO: reset 버튼 만들기 - 수요일에만 활성화..? */}
-      <Button onClick={() => console.log('리셋!')}>수요일이다</Button>
+      <Button onClick={onResetGroup}>수요일이다</Button>
       <Button onClick={() => handleAddGroupAction()}>공격대 생성</Button>
       <Table
         rowKey={'name'}

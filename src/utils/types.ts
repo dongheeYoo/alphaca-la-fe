@@ -18,7 +18,7 @@ export type RaidDifficulties = {
 };
 
 export type Group = {
-  id: string;
+  _id: string;
   name: string;
   raid: string;
   difficulty: string;
