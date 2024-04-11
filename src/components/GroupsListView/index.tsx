@@ -6,25 +6,8 @@ import { useForm } from 'antd/es/form/Form';
 import { GroupItemRegisterForm } from './GroupItemRegisterForm';
 import { useState } from 'react';
 import { Member } from './Member';
-import { useAddGroup, useGroup } from '../../hooks/useGroup';
+import { useAddGroup, useGroup, useInvalidateGroups, useUpdateGroup } from '../../hooks/useGroup';
 import { Group, MemberDataType } from '../../utils/types';
-
-// interface TableDataType {
-//   name: string;
-//   raid: string;
-//   difficulty: string;
-//   done: boolean;
-//   member: MemberTableDataType[];
-// }
-
-// interface MemberTableDataType {
-//   member: {
-//     name: string;
-//     CharacterName: string;
-//     CharacterClassName: string;
-//     ItemMaxLevel: number;
-//   };
-// }
 
 const Container = styled.div({});
 
@@ -39,12 +22,6 @@ const MemberTableSection = styled.div({
 export const GroupsListView = () => {
   const [member, setMember] = useState<MemberDataType[]>([
     {
-      // member: {
-      //   name: '',
-      //   CharacterName: '',
-      //   CharacterClassName: '',
-      //   ItemMaxLevel: 0,
-      // },
       name: '',
       CharacterName: '',
       CharacterClassName: '',
@@ -59,6 +36,8 @@ export const GroupsListView = () => {
 
   const { data } = useGroup();
   const { mutate: addGroup } = useAddGroup();
+  const { mutate: updateGroup } = useUpdateGroup();
+  const invalidateGroups = useInvalidateGroups();
 
   const handleActionClick = (data: Group, callback: any) => {
     editForm.setFieldsValue(data);
@@ -72,25 +51,24 @@ export const GroupsListView = () => {
   };
 
   const onEditGroup = () => {
-    // const data: JobItem = editForm.getFieldsValue();
-    // if (!targetJob) return;
-    // if (!user) return;
-    // const job: Partial<JobItem> = { ...data, id: targetJob.id };
-    // updateJob(
-    //   { job },
-    //   {
-    //     onSuccess: () => {
-    //       invalidateCompanyJobDetail();
-    //       invalidateCompanyJobsList();
-    //     },
-    //     onSettled: () => closeEditDialog(),
-    //   }
-    // );
-    alert('수정');
-    const data = editForm.getFieldsValue();
-    console.log('edited data from Form: ', data);
-    console.log('edited Member data: ', member);
-    closeEditDialog();
+    const data: Group = {
+      ...editForm.getFieldsValue(),
+      member: member,
+    };
+
+    updateGroup(
+      { data },
+      {
+        onSuccess: () => {
+          invalidateGroups();
+          closeEditDialog();
+        },
+        onError: (err: Error) => {
+          alert('공격대 수정에 문제가 발생했습니다.');
+          console.log(err);
+        },
+      }
+    );
   };
   const onAddGroup = () => {
     const data: Group = {
@@ -103,11 +81,15 @@ export const GroupsListView = () => {
       { data },
       {
         onSuccess: () => {
-          console.log('succeed');
+          invalidateGroups();
+          closeAddDialog();
+        },
+        onError: (err: Error) => {
+          alert('공격대 추가에 문제가 발생했습니다.');
+          console.log(err);
         },
       }
     );
-    closeAddDialog();
   };
 
   const onDeleteGroup = () => {
@@ -204,7 +186,6 @@ export const GroupsListView = () => {
     <Container>
       {/* TODO: reset 버튼 만들기 - 수요일에만 활성화..? */}
       <Button onClick={() => console.log('리셋!')}>수요일이다</Button>
-      {/* 공격대 생성 버튼 */}
       <Button onClick={() => handleAddGroupAction()}>공격대 생성</Button>
       <Table
         rowKey={'name'}
