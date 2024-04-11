@@ -75,7 +75,7 @@ const MemberDetails = ({ characterName, setMember }: { characterName: string; se
         name: characterName,
         CharacterName: item.CharacterName,
         CharacterClassName: item.CharacterClassName,
-        ItemMaxLevel: item.ItemMaxLevel,
+        ItemMaxLevel: parseInt(item.ItemMaxLevel.replace(/,/g, '')),
       },
     ]);
   };

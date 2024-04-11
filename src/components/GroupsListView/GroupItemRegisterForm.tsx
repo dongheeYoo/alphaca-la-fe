@@ -11,12 +11,12 @@ export const GroupItemRegisterForm = ({
   initialValues?: any;
   onSubmit?: ((values: any) => void) | undefined;
 }) => {
-  const raidNameOptions = Raids.map((d: Raid, i: number) => ({
-    value: i ? d.name : '',
+  const raidNameOptions = Raids.map((d: Raid) => ({
+    value: d.name,
     label: d.name,
   }));
-  const raidDifficultyOptions = ['노말', '하드'].map((d, i) => ({
-    value: i ? d : '',
+  const raidDifficultyOptions = ['노말', '하드'].map(d => ({
+    value: d,
     label: d,
   }));
   const onFinishFailed = (errorInfo: any) => {
