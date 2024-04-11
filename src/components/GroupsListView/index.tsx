@@ -1,29 +1,30 @@
 import { Button, Modal, Popconfirm, Space, Table, TableColumnsType, Tag } from 'antd';
 import styled from 'styled-components';
-import { groupsMockData } from '../../utils/mock';
 import { GroupMemberTable } from './GroupMemberTable';
 import { useDialog } from '../../hooks/useDialog';
 import { useForm } from 'antd/es/form/Form';
 import { GroupItemRegisterForm } from './GroupItemRegisterForm';
 import { useState } from 'react';
 import { Member } from './Member';
+import { useAddGroup, useGroup } from '../../hooks/useGroup';
+import { Group, MemberDataType } from '../../utils/types';
 
-interface TableDataType {
-  name: string;
-  raid: string;
-  difficulty: string;
-  done: string;
-  member: MemberTableDataType[];
-}
+// interface TableDataType {
+//   name: string;
+//   raid: string;
+//   difficulty: string;
+//   done: boolean;
+//   member: MemberTableDataType[];
+// }
 
-interface MemberTableDataType {
-  member: {
-    name: string;
-    CharacterName: string;
-    CharacterClassName: string;
-    ItemMaxLevel: number;
-  };
-}
+// interface MemberTableDataType {
+//   member: {
+//     name: string;
+//     CharacterName: string;
+//     CharacterClassName: string;
+//     ItemMaxLevel: number;
+//   };
+// }
 
 const Container = styled.div({});
 
@@ -36,14 +37,18 @@ const MemberTableSection = styled.div({
 });
 
 export const GroupsListView = () => {
-  const [member, setMember] = useState<MemberTableDataType[]>([
+  const [member, setMember] = useState<MemberDataType[]>([
     {
-      member: {
-        name: '',
-        CharacterName: '',
-        CharacterClassName: '',
-        ItemMaxLevel: 0,
-      },
+      // member: {
+      //   name: '',
+      //   CharacterName: '',
+      //   CharacterClassName: '',
+      //   ItemMaxLevel: 0,
+      // },
+      name: '',
+      CharacterName: '',
+      CharacterClassName: '',
+      ItemMaxLevel: 0,
     },
   ]);
   const { open: openEditDialog, isOpen: isEditOpen, close: closeEditDialog } = useDialog();
@@ -52,7 +57,10 @@ export const GroupsListView = () => {
   const [addForm] = useForm();
   const [editForm] = useForm();
 
-  const handleActionClick = (data: TableDataType, callback: any) => {
+  const { data } = useGroup();
+  const { mutate: addGroup } = useAddGroup();
+
+  const handleActionClick = (data: Group, callback: any) => {
     editForm.setFieldsValue(data);
     setMember(data.member);
     callback?.();
@@ -85,27 +93,29 @@ export const GroupsListView = () => {
     closeEditDialog();
   };
   const onAddGroup = () => {
-    // const data: JobItem = addForm.getFieldsValue();
-    // if (!user) return;
-    // const companyId = user.companyId;
-    // const job: Partial<JobItem> = { ...data };
-    // postJob(
-    //   { companyId, job },
-    //   {
-    //     onSuccess: () => {
-    //       invalidateCompanyJobsList();
-    //       addForm.resetFields();
-    //       closeAddDialog();
-    //     },
-    //   }
-    // );
-    alert('생성');
-    const data = addForm.getFieldsValue();
-    console.log('added data from Form: ', data);
-    console.log('added Member data: ', member);
+    const data: Group = {
+      ...addForm.getFieldsValue(),
+      done: false,
+      member: member,
+    };
+
+    addGroup(
+      { data },
+      {
+        onSuccess: () => {
+          console.log('succeed');
+        },
+      }
+    );
     closeAddDialog();
   };
-  const columns: TableColumnsType<TableDataType> = [
+
+  const onDeleteGroup = () => {
+    console.log('deleted');
+    closeEditDialog();
+  };
+
+  const columns: TableColumnsType<Group> = [
     {
       title: '공대명',
       dataIndex: 'name',
@@ -158,18 +168,14 @@ export const GroupsListView = () => {
       dataIndex: 'done',
       key: 'done',
       render: (_, { done }) => {
-        const color = done === '완료' ? 'blue' : 'red';
-        return (
-          <Tag color={color} key={done}>
-            {done}
-          </Tag>
-        );
+        const color = done ? 'blue' : 'red';
+        return <Tag color={color}>{done ? '완료' : '미완료'}</Tag>;
       },
     },
     {
       title: 'Actions',
       key: '',
-      render: (_, data: TableDataType) => {
+      render: (_, data: Group) => {
         return (
           <Space size="middle">
             <Button size="small" onClick={() => handleActionClick(data, openEditDialog)}>
@@ -201,9 +207,9 @@ export const GroupsListView = () => {
       {/* 공격대 생성 버튼 */}
       <Button onClick={() => handleAddGroupAction()}>공격대 생성</Button>
       <Table
-        rowKey={'key'}
+        rowKey={'name'}
         columns={columns}
-        dataSource={groupsMockData}
+        dataSource={data}
         pagination={false}
         scroll={{ x: 800 }}
         expandable={{
@@ -224,6 +230,9 @@ export const GroupsListView = () => {
           footer={[
             <Button key="back" onClick={closeEditDialog}>
               취소
+            </Button>,
+            <Button danger key="delete" type="primary" onClick={onDeleteGroup}>
+              삭제
             </Button>,
             <Button htmlType="submit" key="submit" type="primary" onClick={onEditGroup}>
               수정
