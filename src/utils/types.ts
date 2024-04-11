@@ -6,3 +6,29 @@ export type Character = {
   ItemAvgLevel: string;
   ItemMaxLevel: string;
 };
+
+export type Raid = {
+  name: string;
+  difficulties: RaidDifficulties[];
+};
+
+export type RaidDifficulties = {
+  lvLimits: number;
+  difficulty: string;
+};
+
+export type Group = {
+  id: string;
+  name: string;
+  raid: string;
+  difficulty: string;
+  done: boolean;
+  member: MemberDataType[];
+};
+
+export type MemberDataType = {
+  name: string;
+  CharacterName: string;
+  CharacterClassName: string;
+  ItemMaxLevel: number;
+};

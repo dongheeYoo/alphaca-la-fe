@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import { MainPage } from '../MainPage';
 import { Navbar } from '../Navbar';
 import { CharacterListView } from '../CharacterListView';
+import { GroupsListView } from '../GroupsListView';
+import { CalenderView } from '../CalenderView';
 
 const Container = styled.div({
   width: '100%',
@@ -26,6 +28,8 @@ function App() {
         <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="/characters" element={<CharacterListView />} />
+          <Route path="/groups" element={<GroupsListView />} />
+          <Route path="/calender" element={<CalenderView />} />
         </Routes>
       </BodySection>
     </Container>

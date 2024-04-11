@@ -12,7 +12,6 @@ export const useCharacter = (characterName: string) => {
         const itemMaxLevelB = parseFloat(b.ItemMaxLevel.replace(/,/g, ''));
         return itemMaxLevelB - itemMaxLevelA;
       });
-      console.log(sortedCharacterInfoByLv);
       return sortedCharacterInfoByLv;
     },
     enabled: !!characterName,
