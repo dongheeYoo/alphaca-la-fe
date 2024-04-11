@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
+import logo from '../../assets/alphaca-mango.png';
 
 const tabs = [
   {
@@ -42,6 +43,7 @@ const Container = styled.div({
 });
 const LogoSection = styled.div({
   width: '100px',
+  marginTop: '20px',
 });
 const MenuSection = styled.div({
   display: 'flex',
@@ -65,7 +67,11 @@ export const Navbar = () => {
   return (
     <NavHeader>
       <Container>
-        <LogoSection>LOGO</LogoSection>
+        <LogoSection>
+          <Link to={'/'}>
+            <img src={logo} style={{ width: 60, height: 60 }} />
+          </Link>
+        </LogoSection>
         <MenuSection>
           {tabs.map((d, i) => (
             <Link key={d.key} to={d.value} onClick={() => setActiveTabIndex(i)}>
