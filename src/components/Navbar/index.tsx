@@ -27,8 +27,8 @@ const NavHeader = styled.header({
 const Container = styled.div({
   display: 'flex',
   width: '100%',
-  color: '#333',
-  backgroundColor: 'white',
+  color: 'white',
+  backgroundColor: '#312f2f',
   height: '50px',
   lineHeight: '50px',
   position: 'sticky',
@@ -48,6 +48,7 @@ const MenuSection = styled.div({
   gap: '20px',
   padding: '0 10px',
   '>a': {
+    color: 'white',
     textDecoration: 'none',
   },
 });
