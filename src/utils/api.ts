@@ -39,6 +39,17 @@ class API {
     const res = await req.json();
     return res;
   }
+
+  async updateGroup({ data }: { data: any }) {
+    const url = `${END_POINT}/group/${data._id}`;
+    const req = await fetch(url, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ...data }),
+    });
+    const res = await req.json();
+    return res;
+  }
 }
 
 const api = new API();

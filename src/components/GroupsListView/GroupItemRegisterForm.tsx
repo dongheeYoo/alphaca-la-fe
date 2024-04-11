@@ -30,6 +30,9 @@ export const GroupItemRegisterForm = ({
       layout={'vertical'}
       onFinish={onSubmit}
       onFinishFailed={onFinishFailed}>
+      <Form.Item name="_id" style={{ display: 'none' }}>
+        <Input type="hidden" />
+      </Form.Item>
       <Form.Item name="name" label="공대명">
         <Input size="large" placeholder="공대명" />
       </Form.Item>
