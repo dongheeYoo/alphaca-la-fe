@@ -16,3 +16,19 @@ export type RaidDifficulties = {
   lvLimits: number;
   difficulty: string;
 };
+
+export type Group = {
+  id: string;
+  name: string;
+  raid: string;
+  difficulty: string;
+  done: boolean;
+  member: MemberDataType[];
+};
+
+export type MemberDataType = {
+  name: string;
+  CharacterName: string;
+  CharacterClassName: string;
+  ItemMaxLevel: number;
+};
