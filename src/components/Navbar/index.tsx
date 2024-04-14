@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import logo from '../../assets/alphaca-mango.png';
+import { Switch } from 'antd';
 
 const tabs = [
   {
@@ -30,6 +31,7 @@ const Container = styled.div({
   width: '100%',
   color: 'white',
   backgroundColor: '#312f2f',
+  justifyContent: 'space-between',
   height: '50px',
   lineHeight: '50px',
   position: 'sticky',
@@ -42,11 +44,15 @@ const Container = styled.div({
   padding: '11px 25px',
 });
 const LogoSection = styled.div({
+  display: 'flex',
+  flex: 1,
+  alignItems: 'center',
   width: '100px',
   marginTop: '20px',
 });
 const MenuSection = styled.div({
   display: 'flex',
+  flex: 14,
   gap: '20px',
   padding: '0 10px',
   '>a': {
@@ -55,8 +61,14 @@ const MenuSection = styled.div({
   },
 });
 
-export const Navbar = () => {
+const DarkModeSection = styled.div({
+  display: 'flex',
+  flex: 1,
+});
+
+export const Navbar = ({ themeMode, toggleTheme }: { themeMode: any; toggleTheme: any }) => {
   const location = useLocation();
+
   const [activeTabIndex, setActiveTabIndex] = useState<number>(0);
 
   useEffect(() => {
@@ -79,6 +91,12 @@ export const Navbar = () => {
             </Link>
           ))}
         </MenuSection>
+        <DarkModeSection>
+          {/* <Button onClick={toggleTheme}>
+            {themeMode === 'light' ? '일반모드로 테마 변경하기' : '다크모드로 테마 변경하기'}
+          </Button> */}
+          <Switch defaultChecked={themeMode === 'dark' ? true : false} onChange={toggleTheme} />
+        </DarkModeSection>
       </Container>
     </NavHeader>
   );

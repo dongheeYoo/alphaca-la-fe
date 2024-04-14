@@ -141,8 +141,9 @@ export const GroupsListView = () => {
   };
 
   const onResetGroup = () => {
-    resetGroup();
-    invalidateGroups();
+    resetGroup(undefined, {
+      onSuccess: invalidateGroups,
+    });
   };
 
   const columns: TableColumnsType<Group> = [
@@ -234,8 +235,12 @@ export const GroupsListView = () => {
   return (
     <Container>
       {/* TODO: reset 버튼 만들기 - 수요일에만 활성화..? */}
-      <Button onClick={onResetGroup}>수요일이다</Button>
-      <Button onClick={() => handleAddGroupAction()}>공격대 생성</Button>
+      <Button className={'resetDoneBtn'} onClick={onResetGroup}>
+        수요일이다
+      </Button>
+      <Button className={'addGroupBtn'} onClick={() => handleAddGroupAction()}>
+        공격대 생성
+      </Button>
       <Table
         rowKey={'name'}
         columns={columns}
