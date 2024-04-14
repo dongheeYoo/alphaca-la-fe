@@ -8,13 +8,6 @@ import { CalenderView } from '../CalenderView';
 import { dark, light } from '../../style/theme';
 import { useTheme } from '../../hooks/useTheme';
 
-// const Container = styled.div({
-//   width: '100%',
-//   height: '100%',
-//   backgroundColor:
-//   background-color: ${props => props.theme.colors.bgColor};
-// });
-
 const Container = styled.div`
   width: 100%;
   height: 100vh;
@@ -22,24 +15,6 @@ const Container = styled.div`
 `;
 
 //.css-dev-only-do-not-override-42nv3w).ant-table-wrapper .ant-table
-
-// const BodySection = styled.div((props: any) => ({
-//   display: 'flex',
-//   position: 'relative',
-//   top: '50px',
-//   width: '100%',
-//   overflow: 'hidden',
-//   justifyContent: 'center',
-//   flexDirection: 'column',
-//   '.ant-table': {
-//     backgroundColor: 'black',
-//     color: 'white',
-//   },
-//   '.ant-table-thead>tr>th': {
-//     backgroundColor: 'black',
-//     color: 'white',
-//   },
-// }));
 
 const BodySection = styled.div`
   display: flex;
@@ -50,14 +25,52 @@ const BodySection = styled.div`
   justify-content: center;
   //flex-direction: column; 중앙정렬?
 
+  .addGroupBtn,
+  .resetDoneBtn {
+    background-color: ${props => props.theme.colors.btnBgColor};
+    color: ${props => props.theme.colors.btnFontColor};
+    border: none;
+  }
+
+  //table 전체 css
   .ant-table {
     background-color: ${props => props.theme.colors.tableColor};
     color: ${props => props.theme.colors.fontColor};
+
+    //table row hover시 css
+    .ant-table-row-level-0:hover > td {
+      background-color: ${props => props.theme.colors.hoverBgColor};
+      color: ${props => props.theme.colors.hoverFontColor};
+    }
+
+    //table action button
+    .ant-table-row-level-0 .ant-table-cell button {
+      background-color: ${props => props.theme.colors.btnBgColor};
+      color: ${props => props.theme.colors.btnFontColor};
+    }
+
+    //table action button : disabled
+    .ant-table-row-level-0 .ant-table-cell button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
   }
 
   .ant-table-thead > tr > th {
     background-color: ${props => props.theme.colors.tableColor};
     color: ${props => props.theme.colors.fontColor};
+  }
+
+  //table + icon css
+  .ant-table-row-expand-icon {
+    background-color: ${props => props.theme.colors.expandIconBgColor};
+    color: ${props => props.theme.colors.expandIconFontColor};
+  }
+
+  //calendar
+  .ant-picker-body,
+  .ant-picker-calendar {
+    background-color: ${props => props.theme.colors.calendarBgColor};
   }
 `;
 
