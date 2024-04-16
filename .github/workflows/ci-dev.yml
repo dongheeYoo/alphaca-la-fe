@@ -35,6 +35,6 @@ jobs:
           script: |
             sudo docker rm -f $(docker ps -qa)
             sed -i "s/FE_IMAGE_TAG=.*$/FE_IMAGE_TAG=develop/" .env
-            docker pull ${{ secrets.DOCKER_REPO }}/youpro-fe:develop
+            docker pull ${{ secrets.DOCKER_REPO }}/fe:develop
             docker-compose up -d
             docker image prune -f
