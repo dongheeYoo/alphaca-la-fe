@@ -19,11 +19,6 @@ const columns: TableColumnsType<Character> = [
     dataIndex: 'CharacterClassName',
     key: 'CharacterClassName',
   },
-  {
-    title: '레이드',
-    dataIndex: 'raid',
-    key: 'raid',
-  },
 ];
 
 export const CharacterTable = ({ characterName }: { characterName: string }) => {
@@ -32,21 +27,10 @@ export const CharacterTable = ({ characterName }: { characterName: string }) => 
     <Table
       rowKey={'key'}
       columns={columns}
-      dataSource={data?.map((d: Character) => ({
-        ...d,
-        raid: Raids.filter(raid => {
-          return raid.difficulties.some(
-            difficulty => difficulty.lvLimits < parseInt(d.ItemMaxLevel.replace(/,/g, ''))
-          );
-        })
-          .sort((a, b) => {
-            return b.difficulties[0].lvLimits - a.difficulties[0].lvLimits;
-          })
-          .slice(0, 3)
-          .map(d => {
-            return d.name + d.difficulties[0].difficulty;
-          }),
-      }))}
+      // dataSource={data?.map((d: Character) => ({
+      //   ...d,
+      // }))}
+      dataSource={data}
       pagination={{
         pageSize: 7,
         //hideOnSinglePage: true,
