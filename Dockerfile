@@ -1,4 +1,4 @@
-FROM node:16.10-alpine as builder
+FROM node:20.12.0 as builder
 
 # 작업 디렉토리
 WORKDIR /app
