@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import logo from '../../assets/alphaca-mango.png';
+import classnames from 'classnames';
 import { Switch } from 'antd';
 
 const tabs = [
@@ -66,6 +67,17 @@ const DarkModeSection = styled.div({
   flex: 1,
 });
 
+const SubMenuSection = styled.div`
+  &:hover {
+    box-shadow: inset 0 -2px #ddd;
+  }
+
+  &.--active {
+    box-shadow: inset 0 -2px #dddr;
+    -webkit-box-shadow: inset 0 -2px #ddd;
+  }
+`;
+
 export const Navbar = ({ themeMode, toggleTheme }: { themeMode: any; toggleTheme: any }) => {
   const location = useLocation();
 
@@ -87,7 +99,9 @@ export const Navbar = ({ themeMode, toggleTheme }: { themeMode: any; toggleTheme
         <MenuSection>
           {tabs.map((d, i) => (
             <Link key={d.key} to={d.value} onClick={() => setActiveTabIndex(i)}>
-              {d.name}
+              <SubMenuSection className={classnames({ '--active': activeTabIndex === i })}>
+                {d.name}
+              </SubMenuSection>
             </Link>
           ))}
         </MenuSection>
