@@ -1,8 +1,9 @@
 import { Table, TableColumnsType } from 'antd';
 import styled from 'styled-components';
+import { characterTableData } from '../../constants/users';
 
 interface TableDataType {
-  name: string;
+  name: string | undefined;
   CharacterName: string;
   CharacterClassName: string;
   ItemMaxLevel: number;
@@ -34,9 +35,16 @@ const columns: TableColumnsType<TableDataType> = [
 ];
 
 export const GroupMemberTable = ({ member }: { member: TableDataType[] }) => {
+  const modifiedMember = member.map(d => {
+    const name = d.name;
+    return {
+      ...d,
+      name: characterTableData.find(d => d.characterName === name)?.name,
+    };
+  });
   return (
     <Container>
-      <Table rowKey={'name'} columns={columns} dataSource={member} pagination={false} />
+      <Table rowKey={'name'} columns={columns} dataSource={modifiedMember} pagination={false} />
     </Container>
   );
 };
