@@ -171,6 +171,9 @@ export const GroupsListView = () => {
           case '상아탑':
             color = 'red';
             break;
+          case '에키드나':
+            color = 'pink';
+            break;
           default:
             break;
         }
