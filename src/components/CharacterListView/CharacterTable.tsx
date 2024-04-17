@@ -1,7 +1,6 @@
 import { Table, TableColumnsType } from 'antd';
 import { useCharacter } from '../../hooks/useCharacter';
 import { Character } from '../../utils/types';
-import { Raids } from '../../utils/raids';
 
 const columns: TableColumnsType<Character> = [
   {
@@ -27,13 +26,9 @@ export const CharacterTable = ({ characterName }: { characterName: string }) => 
     <Table
       rowKey={'key'}
       columns={columns}
-      // dataSource={data?.map((d: Character) => ({
-      //   ...d,
-      // }))}
       dataSource={data}
       pagination={{
         pageSize: 7,
-        //hideOnSinglePage: true,
       }}
     />
   );

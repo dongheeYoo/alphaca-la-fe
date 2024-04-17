@@ -1,3 +1,9 @@
+export type UserDataType = {
+  key: number;
+  name: string;
+  characterName: string;
+};
+
 export type Character = {
   ServerName: string;
   CharacterName: string;
