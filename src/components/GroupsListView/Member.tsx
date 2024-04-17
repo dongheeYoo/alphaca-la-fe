@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useCharacter } from '../../hooks/useCharacter';
 import { useState } from 'react';
 import { CloseOutlined } from '@ant-design/icons';
+import { characterTableData } from '../../constants/users';
 
 const Container = styled.div({
   display: 'flex',
@@ -24,7 +25,8 @@ interface MemberDataType {
   ItemMaxLevel: number;
 }
 
-const characterNames = ['히도뉴', 'RAFF', '알망고얌', '아키나츠리', '수라로로'];
+//const characterNames = ['히도뉴', 'RAFF', '알망고얌', '아키나츠리', '수라로로'];
+//const characterNames = characterTableData.map(d => d.characterName);
 
 export const Member = ({ member, setMember }: { member: any; setMember: any }) => {
   const [targetData, setTargetData] = useState<string>('');
@@ -44,10 +46,12 @@ export const Member = ({ member, setMember }: { member: any; setMember: any }) =
           size="small"
           header={<div>이름</div>}
           bordered
-          dataSource={characterNames}
+          dataSource={characterTableData.map(d => d.characterName)}
           renderItem={item => (
             <List.Item>
-              <Button onClick={() => handleAction(item)}>{item}</Button>
+              <Button style={{ border: 'none' }} onClick={() => handleAction(item)}>
+                {characterTableData.find(d => d.characterName === item)?.name}
+              </Button>
             </List.Item>
           )}
         />
@@ -55,7 +59,7 @@ export const Member = ({ member, setMember }: { member: any; setMember: any }) =
       </ListSection>
       <MemberSection>
         {member?.map((d: any, i: any) => (
-          <Button key={i} onClick={() => editMemberItems(d)}>
+          <Button style={{ border: 'none' }} key={i} onClick={() => editMemberItems(d)}>
             {d.CharacterName}
             <CloseOutlined />
           </Button>
@@ -88,7 +92,9 @@ const MemberDetails = ({ characterName, setMember }: { characterName: string; se
       dataSource={data?.slice(0, 6)}
       renderItem={item => (
         <List.Item>
-          <Button onClick={() => handleAction(item)}>{item.CharacterName}</Button>
+          <Button style={{ border: 'none' }} onClick={() => handleAction(item)}>
+            {item.CharacterName}
+          </Button>
         </List.Item>
       )}
     />
