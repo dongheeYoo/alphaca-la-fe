@@ -69,6 +69,13 @@ class API {
     const res = await req.json();
     return res;
   }
+
+  async getCharactersGroupInfo(characterName: string) {
+    const url = `${END_POINT}/group/member/info/${characterName}`;
+    const req = await fetch(url);
+    const res = await req.json();
+    return res;
+  }
 }
 
 const api = new API();

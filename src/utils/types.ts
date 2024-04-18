@@ -13,6 +13,13 @@ export type Character = {
   ItemMaxLevel: string;
 };
 
+export type CharacterGroupInfo = {
+  groupName: string;
+  raid: string;
+  difficulty: string;
+  done: boolean;
+};
+
 export type Raid = {
   name: string;
   difficulties: RaidDifficulties[];
