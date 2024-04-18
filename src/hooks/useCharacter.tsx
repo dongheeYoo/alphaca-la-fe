@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { Character } from '../utils/types';
+import { Character, CharacterGroupInfo } from '../utils/types';
 import api from '../utils/api';
 
 export const useCharacter = (characterName: string) => {
@@ -15,5 +15,12 @@ export const useCharacter = (characterName: string) => {
       return sortedCharacterInfoByLv;
     },
     enabled: !!characterName,
+  });
+};
+
+export const useCharacterGroupInfo = (characterName: string) => {
+  return useQuery<CharacterGroupInfo[], Error, CharacterGroupInfo[]>({
+    queryKey: ['characterGroupInfo', characterName],
+    queryFn: () => api.getCharactersGroupInfo(characterName),
   });
 };
