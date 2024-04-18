@@ -23,7 +23,7 @@ const columns = [
     title: '공격대 현황',
     dataIndex: '',
     key: '',
-    render: (_, record: Character) => {
+    render: (_: any, record: Character) => {
       return <CharacterDetailTable characterName={record.CharacterName} />;
     },
   },
