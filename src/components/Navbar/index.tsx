@@ -81,11 +81,11 @@ const SubMenuSection = styled.div`
 export const Navbar = ({ themeMode, toggleTheme }: { themeMode: any; toggleTheme: any }) => {
   const location = useLocation();
 
-  const [activeTabIndex, setActiveTabIndex] = useState<number>(0);
+  const [activeTabIndex, setActiveTabIndex] = useState<number>(-1);
 
   useEffect(() => {
     const index = tabs.findIndex(d => d.value && location.pathname.includes(d.value));
-    setActiveTabIndex(location.pathname === '/' ? 0 : index);
+    setActiveTabIndex(location.pathname === '/' ? -1 : index);
   }, [location]);
 
   return (

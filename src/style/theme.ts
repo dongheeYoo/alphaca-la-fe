@@ -9,7 +9,7 @@ export const dark = {
     btnFontColor: '#E3E1E3',
     expandIconBgColor: '#131213',
     expandIconFontColor: '#FFFFFF',
-    calendarBgColor: '#403C40',
+    calendarColor: '#FEFEFE',
   },
 };
 
@@ -24,6 +24,6 @@ export const light = {
     btnFontColor: '#202124',
     expandIconBgColor: '#FFFFFF',
     expandIconFontColor: '#131213',
-    calendarBgColor: '#E3E1E3',
+    calendarColor: '#202124',
   },
 };

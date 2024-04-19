@@ -10,7 +10,7 @@ import { useTheme } from '../../hooks/useTheme';
 
 const Container = styled.div`
   width: 100%;
-  height: 100vh;
+  height: 250vh;
   background-color: ${props => props.theme.colors.bgColor};
 `;
 
@@ -70,7 +70,12 @@ const BodySection = styled.div`
   //calendar
   .ant-picker-body,
   .ant-picker-calendar {
-    background-color: ${props => props.theme.colors.calendarBgColor};
+    background-color: ${props => props.theme.colors.bgColor};
+    color: white;
+  }
+  .ant-picker-calendar-date-value,
+  .ant-picker-content > thead > tr > th {
+    color: ${props => props.theme.colors.calendarColor};
   }
 `;
 
