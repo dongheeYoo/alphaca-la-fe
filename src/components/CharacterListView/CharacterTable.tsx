@@ -1,7 +1,6 @@
 import { Table } from 'antd';
 import { useCharacter, useCharacterGroupInfo } from '../../hooks/useCharacter';
 import { Character } from '../../utils/types';
-//import { Character } from '../../utils/types';
 
 const columns = [
   {
@@ -46,7 +45,6 @@ export const CharacterTable = ({ characterName }: { characterName: string }) => 
 
 const CharacterDetailTable = ({ characterName }: { characterName: string }) => {
   const { data: groupInfo } = useCharacterGroupInfo(characterName);
-  console.log(groupInfo?.length);
   return groupInfo?.length ? (
     <div>
       {groupInfo.map((d, i) => {
