@@ -14,7 +14,6 @@ export const useGameContents = () => {
       return d.filter((d: any) =>
         d.StartTimes.some((startTime: any) => {
           const startTimeDate = new Date(startTime).toISOString().split('T')[0];
-          console.log(startTimeDate);
           return startTimeDate === formattedToday;
         })
       );
