@@ -9,9 +9,7 @@ class API {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        //authorization: `bearer ${import.meta.env.VITE_APP_API_KEY}`,
-        //prod
-        authorization: `bearer ${process.env.VITE_APP_API_KEY}`,
+        authorization: `bearer ${import.meta.env.VITE_APP_API_KEY}`,
       },
     });
     const res = await req.json();
@@ -28,10 +26,7 @@ class API {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        //dev
-        //authorization: `bearer ${import.meta.env.VITE_APP_API_KEY}`,
-        //prod
-        authorization: `bearer ${process.env.VITE_APP_API_KEY}`,
+        authorization: `bearer ${import.meta.env.VITE_APP_API_KEY}`,
       },
     });
     const res = await req.json();

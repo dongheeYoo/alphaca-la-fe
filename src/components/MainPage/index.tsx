@@ -66,6 +66,10 @@ export const MainPage = () => {
   const day = (today.getDate() < 10 ? '0' : '') + today.getDate();
   const formattedToday = `${year}-${month}-${day}`;
 
+  if (isLoading) {
+    return <div>isLoading...</div>;
+  }
+
   const chaosGateData =
     data &&
     data.filter(
@@ -97,9 +101,6 @@ export const MainPage = () => {
         })
     );
 
-  if (isLoading) {
-    return <div>isLoading...</div>;
-  }
   return (
     <Container>
       {/* 오늘의 섬 */}
