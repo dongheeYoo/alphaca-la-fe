@@ -11,12 +11,12 @@ export const useGameContents = () => {
       const month = (today.getMonth() + 1 < 10 ? '0' : '') + (today.getMonth() + 1);
       const day = (today.getDate() < 10 ? '0' : '') + today.getDate();
       const formattedToday = `${year}-${month}-${day}`;
-      return d.filter((d: any) =>
-        d.StartTimes.some((startTime: any) => {
+      return d.filter((d: any) => {
+        return d.StartTimes?.some((startTime: string) => {
           const startTimeDate = new Date(startTime).toISOString().split('T')[0];
           return startTimeDate === formattedToday;
-        })
-      );
+        });
+      });
     },
   });
 };
