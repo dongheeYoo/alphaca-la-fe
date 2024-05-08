@@ -1,5 +1,11 @@
 FROM node:20.12.0 as builder
 
+# Define build arguments for environment variables
+ARG VITE_APP_API_KEY
+
+# Set environment variables during the build process
+ENV VITE_APP_API_KEY=$VITE_APP_API_KEY
+
 # 작업 디렉토리
 WORKDIR /app
 
