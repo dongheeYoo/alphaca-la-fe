@@ -238,9 +238,14 @@ export const GroupsListView = () => {
   return (
     <Container>
       {/* TODO: reset 버튼 만들기 - 수요일에만 활성화..? */}
-      <Button className={'resetDoneBtn'} onClick={onResetGroup}>
-        수요일이다
-      </Button>
+      <Popconfirm
+        title="리셋"
+        description="리셋처리 하시겠습니까?"
+        onConfirm={onResetGroup}
+        okText="리셋"
+        cancelText="취소">
+        <Button className={'resetDoneBtn'}>수요일이다</Button>
+      </Popconfirm>
       <Button className={'addGroupBtn'} onClick={() => handleAddGroupAction()}>
         공격대 생성
       </Button>
