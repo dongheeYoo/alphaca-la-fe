@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import logo from '../../assets/alphaca-mango.png';
 import classnames from 'classnames';
 import { Switch } from 'antd';
+import { MoonFilled, SunFilled } from '@ant-design/icons';
 
 const tabs = [
   {
@@ -109,7 +110,12 @@ export const Navbar = ({ themeMode, toggleTheme }: { themeMode: any; toggleTheme
           {/* <Button onClick={toggleTheme}>
             {themeMode === 'light' ? '일반모드로 테마 변경하기' : '다크모드로 테마 변경하기'}
           </Button> */}
-          <Switch defaultChecked={themeMode === 'dark' ? true : false} onChange={toggleTheme} />
+          <Switch
+            checkedChildren={<MoonFilled />}
+            unCheckedChildren={<SunFilled />}
+            defaultChecked={themeMode === 'dark' ? true : false}
+            onChange={toggleTheme}
+          />
         </DarkModeSection>
       </Container>
     </NavHeader>
