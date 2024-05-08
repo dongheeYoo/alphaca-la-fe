@@ -20,7 +20,7 @@ jobs:
       - name: Docker build & push to dev
         run: |
           docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-          docker build -t ${{ secrets.DOCKER_REPO }}/fe:develop .
+          docker build --build-arg VITE_APP_API_KEY=${{ secrets.VITE_APP_API_KEY }} -t ${{ secrets.DOCKER_REPO }}/fe:develop .
           docker push ${{ secrets.DOCKER_REPO }}/fe:develop
 
       ## deploy to develop
