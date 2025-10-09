@@ -7,6 +7,7 @@ import { GroupsListView } from '../GroupsListView';
 import { CalenderView } from '../CalenderView';
 import { dark, light } from '../../style/theme';
 import { useTheme } from '../../hooks/useTheme';
+import { GuildCharacterListView } from '../GuildCharacterListView';
 
 const Container = styled.div`
   width: 100%;
@@ -94,6 +95,7 @@ function App() {
             <Route path="/characters" element={<CharacterListView />} />
             <Route path="/groups" element={<GroupsListView />} />
             <Route path="/calender" element={<CalenderView />} />
+            <Route path="/guild" element={<GuildCharacterListView />} />
           </Routes>
         </BodySection>
       </Container>

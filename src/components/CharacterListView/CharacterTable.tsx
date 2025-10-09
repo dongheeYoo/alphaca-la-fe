@@ -30,7 +30,6 @@ const columns = [
 
 export const CharacterTable = ({ characterName }: { characterName: string }) => {
   const { data } = useCharacter(characterName);
-
   return (
     <Table
       rowKey={'key'}
