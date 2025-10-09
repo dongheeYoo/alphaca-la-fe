@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { Character, CharacterGroupInfo } from '../utils/types';
+import { Character, CharacterGroupInfo, CharacterProfile } from '../utils/types';
 import api from '../utils/api';
 
 export const useCharacter = (characterName: string) => {
@@ -22,5 +22,13 @@ export const useCharacterGroupInfo = (characterName: string) => {
   return useQuery<CharacterGroupInfo[], Error, CharacterGroupInfo[]>({
     queryKey: ['characterGroupInfo', characterName],
     queryFn: () => api.getCharactersGroupInfo(characterName),
+  });
+};
+
+export const useCharacterProfile = (characterName: string) => {
+  return useQuery<CharacterProfile, Error, CharacterProfile>({
+    queryKey: ['characterProfile', characterName],
+    queryFn: () => api.getCharacterProfiles(characterName),
+    enabled: !!characterName,
   });
 };

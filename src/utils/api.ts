@@ -1,6 +1,6 @@
-import { Character, Group } from './types';
-//const END_POINT = `http://localhost:8080/api`;
-const END_POINT = `http://115.85.180.49:8080/api`;
+import { Character, CharacterProfile, Group } from './types';
+const END_POINT = `http://localhost:8080/api`;
+//const END_POINT = `http://115.85.180.49:8080/api`;
 
 class API {
   async getCharacterInfo(characterName: string) {
@@ -18,6 +18,20 @@ class API {
       key: i,
     }));
     return result;
+  }
+
+  async getCharacterProfiles(characterName: string) {
+    const url = `https://developer-lostark.game.onstove.com/armories/characters/${characterName}?filters=profiles%2Barkpassive%2Barkgrid`;
+    const req = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: `bearer ${import.meta.env.VITE_APP_API_KEY}`,
+      },
+    });
+    const res = await req.json();
+
+    return res;
   }
 
   async getGameContentsInfo() {

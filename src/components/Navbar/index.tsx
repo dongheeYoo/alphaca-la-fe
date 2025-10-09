@@ -22,6 +22,11 @@ const tabs = [
     value: 'calender',
     name: '스케쥴 관리',
   },
+  {
+    key: 'guild',
+    value: 'guild',
+    name: '길드차트',
+  },
 ];
 
 const NavHeader = styled.header({

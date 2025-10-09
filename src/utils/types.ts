@@ -13,6 +13,24 @@ export type Character = {
   ItemMaxLevel: string;
 };
 
+export type CharacterProfile = {
+  ArmoryProfile: {
+    CharacterName: string;
+    ExpeditionLevel: number;
+    ItemAvgLevel: string;
+    CombatPower: string;
+    CharacterClassName: string;
+  };
+  ArkPassive: {
+    Title: string;
+  };
+  ArkGrid: {
+    Slots: {
+      Grade: string;
+    }[];
+  };
+};
+
 export type CharacterGroupInfo = {
   groupName: string;
   raid: string;
